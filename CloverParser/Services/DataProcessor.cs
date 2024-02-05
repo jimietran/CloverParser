@@ -31,8 +31,7 @@ namespace CloverParser.Services
                         }
                         var value = line.Substring(index, spec.Width).Trim();
                         var convertedValue = _typeHelper.ConvertValue(spec.DataType, value);
-                        if (convertedValue != null)
-                            lineData.Add(spec.ColumnName, convertedValue);
+                        lineData.Add(spec.ColumnName, convertedValue);
                         index += spec.Width;
                     }
                     processedData.Add(lineData);

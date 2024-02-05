@@ -54,7 +54,7 @@ namespace CloverParser.Services
                     }
 
                     var outputFile = $"{specFile}{Regex.Match(dataFile, DATA_REGEX).Groups[2].Value}.ndjson";
-                    WriteToOutput(OUTPUT_PATH + outputFile, data); // Consider recording which files failed
+                    WriteToOutput(OUTPUT_PATH + outputFile, data);
                     Console.WriteLine($"{outputFile} created.");
                 }
             }
