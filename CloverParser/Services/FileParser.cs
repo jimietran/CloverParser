@@ -46,7 +46,7 @@ namespace CloverParser.Services
                         continue;
                     }
 
-                    var data = _dataProcessor.Process($"{DATA_PATH}{dataFile}", specs);
+                    var data = _dataProcessor.Process(DATA_PATH + dataFile, specs);
                     if (data.Count == 0)
                     {
                         Console.WriteLine($"{dataFile} could not be processed.");

@@ -26,7 +26,7 @@ namespace CloverParser.Services
                     {
                         if (index + spec.Width > line.Length)
                         {
-                            Console.WriteLine("Reached end of line.");
+                            Console.WriteLine($"Width of spec: {spec.ColumnName} is too large. Reached end of line.");
                             break;
                         }
                         var value = line.Substring(index, spec.Width).Trim();

@@ -19,7 +19,6 @@ namespace CloverParser.Helpers
                     return val;
                 default:
                     throw new NotImplementedException();
-
             }
         }
     }

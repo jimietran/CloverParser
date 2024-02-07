@@ -15,7 +15,7 @@ namespace CloverParser.Services
                     var columns = line.Split(',');
                     if (columns.Length != 3)
                     {
-                        Console.WriteLine("Specification contains more than 3 columns, skipping line.");
+                        Console.WriteLine("Specification contains more than 3 columns, skipping current line.");
                         continue;
                     }
 
@@ -23,7 +23,7 @@ namespace CloverParser.Services
                     _ = int.TryParse(columns[1].Trim(), out int width);
                     if (width == 0)
                     {
-                        Console.WriteLine("Width is 0, skipping line.");
+                        Console.WriteLine("Width is 0, skipping current line.");
                         continue;
                     }
 
