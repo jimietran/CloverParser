@@ -1,1 +1,5 @@
 ﻿.vs
+CloverParserTest/obj
+CloverParserTest/bin
+CloverParser/bin
+CloverParser/obj
