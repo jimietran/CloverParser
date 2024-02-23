@@ -13,8 +13,7 @@ namespace CloverParser.Helpers
                 case DataType.BOOLEAN:
                     return value.Equals("1") || value.ToLower().Equals("true");
                 case DataType.INTEGER:
-                    bool successful = int.TryParse(value, out int val);
-                    if (!successful)
+                    if (!int.TryParse(value, out int val))
                         Console.WriteLine($"{value} is not a valid integer.");
                     return val;
                 default:

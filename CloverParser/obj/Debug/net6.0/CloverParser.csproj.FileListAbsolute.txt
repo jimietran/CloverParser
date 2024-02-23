@@ -49,3 +49,4 @@ C:\Users\jimie\Desktop\CloverParser\CloverParser\obj\Debug\net6.0\refint\CloverP
 C:\Users\jimie\Desktop\CloverParser\CloverParser\obj\Debug\net6.0\CloverParser.pdb
 C:\Users\jimie\Desktop\CloverParser\CloverParser\obj\Debug\net6.0\CloverParser.genruntimeconfig.cache
 C:\Users\jimie\Desktop\CloverParser\CloverParser\obj\Debug\net6.0\ref\CloverParser.dll
+C:\Users\jimie\Desktop\CloverParser\CloverParser\bin\Debug\net6.0\appsettings.json

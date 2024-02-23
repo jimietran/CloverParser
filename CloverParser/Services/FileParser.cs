@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
 namespace CloverParser.Services
@@ -6,23 +7,22 @@ namespace CloverParser.Services
     public class FileParser : IFileParser
     {
         private const string DATA_REGEX = "^(.*)(_[0-9]{4}\\-[0-9]{1,2}\\-[0-9]{1,2})\\.txt$";
-        private const string DATA_PATH = "../../../Data/";
-        private const string SPEC_PATH = "../../../Specs/";
-        private const string OUTPUT_PATH = "../../../Output/";
         private readonly ISpecProcessor _specProcessor;
         private readonly IDataProcessor _dataProcessor;
+        private readonly IConfiguration _configuration;
 
-        public FileParser(ISpecProcessor specProcessor, IDataProcessor dataProcessor)
+        public FileParser(ISpecProcessor specProcessor, IDataProcessor dataProcessor, IConfiguration configuration)
         {
             _specProcessor = specProcessor;
             _dataProcessor = dataProcessor;
+            _configuration = configuration;
         }
 
         public void Parse()
         {
             try
             {
-                var dataFiles = Directory.GetFiles(DATA_PATH).Select(f => Path.GetFileName(f));
+                var dataFiles = Directory.GetFiles(_configuration.GetValue<string>("DATA_PATH")).Select(f => Path.GetFileName(f));
                 foreach (var dataFile in dataFiles)
                 {
                     if (!Regex.IsMatch(dataFile, DATA_REGEX))
@@ -32,7 +32,7 @@ namespace CloverParser.Services
                     }
 
                     var specFile = $"{Regex.Match(dataFile, DATA_REGEX).Groups[1].Value}";
-                    var specFilePath = $"{SPEC_PATH}{Regex.Match(dataFile, DATA_REGEX).Groups[1].Value}.csv";
+                    var specFilePath = $"{_configuration.GetValue<string>("SPEC_PATH")}{Regex.Match(dataFile, DATA_REGEX).Groups[1].Value}.csv";
                     if (!File.Exists(specFilePath))
                     {
                         Console.WriteLine($"{specFile}.csv does not exist.");
@@ -46,7 +46,7 @@ namespace CloverParser.Services
                         continue;
                     }
 
-                    var data = _dataProcessor.Process(DATA_PATH + dataFile, specs);
+                    var data = _dataProcessor.Process(_configuration.GetValue<string>("DATA_PATH") + dataFile, specs);
                     if (data.Count == 0)
                     {
                         Console.WriteLine($"{dataFile} could not be processed.");
@@ -54,7 +54,7 @@ namespace CloverParser.Services
                     }
 
                     var outputFile = $"{specFile}{Regex.Match(dataFile, DATA_REGEX).Groups[2].Value}.ndjson";
-                    WriteToOutput(OUTPUT_PATH + outputFile, data);
+                    WriteToOutput(_configuration.GetValue<string>("OUTPUT_PATH") + outputFile, data);
                     Console.WriteLine($"{outputFile} created.");
                 }
             }
