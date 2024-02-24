@@ -32,7 +32,7 @@ namespace CloverParser.Services
                     }
 
                     var specFile = $"{Regex.Match(dataFile, DATA_REGEX).Groups[1].Value}";
-                    var specFilePath = $"{_configuration.GetValue<string>("SPEC_PATH")}{Regex.Match(dataFile, DATA_REGEX).Groups[1].Value}.csv";
+                    var specFilePath = $"{_configuration.GetValue<string>("SPEC_PATH")}{specFile}.csv";
                     if (!File.Exists(specFilePath))
                     {
                         Console.WriteLine($"{specFile}.csv does not exist.");
